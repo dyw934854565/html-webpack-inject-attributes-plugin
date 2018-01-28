@@ -1,0 +1,25 @@
+{
+  "name": "html-webpack-inject-attributes-plugin",
+  "version": "1.0.0",
+  "description": "add custom attributes to inject script and link",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dyw934854565/html-webpack-inject-attributes-plugin.git"
+  },
+  "keywords": [
+    "html-webpack-plugin",
+    "inject",
+    "attributes",
+    "webpack"
+  ],
+  "author": "dyw934854565@sina.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dyw934854565/html-webpack-inject-attributes-plugin/issues"
+  },
+  "homepage": "https://github.com/dyw934854565/html-webpack-inject-attributes-plugin#readme"
+}
