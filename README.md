@@ -8,16 +8,21 @@ add custom attributes to inject tags
 
 ### use
 
-*** add to all inject tags
+add to all inject tags
 ```javascript
     plugins = [
         new htmlWebpackInjectAttributesPlugin({
-            frominject: "true"
+            inject: "true"
         })  // Object, key should be string, value can be string or function
     ]
 ```
+you got
 
-*** add to chunks in HtmlWebpackPlugin
+```html
+    <script type="text/javascript" src="index.js" inject="true"></script>
+```
+
+add to chunks in HtmlWebpackPlugin
 by add attributes to HtmlWebpackPlugin
 
 ```javascript
@@ -26,10 +31,21 @@ by add attributes to HtmlWebpackPlugin
             inject: true,
             hash: true,
             chunks: ['index'],
-            template: resolve('../index.template.html'),
             attributes: {
-                'data-src': function (node) { return node.attributes.src }
+                'data-src': function (tag) { return tag.attributes.src }
             },
         })  // Object, key and value should be string
     ]
+    /**
+     *  if value is a function, got three arguments。
+     *  1、tag, ast of tag node
+     *  2、compilation, you can get webpack build hash by compilation.hash
+     *  3、index, index of trunks
+    **/
+```
+
+you got
+
+```html
+    <script type="text/javascript" src="index.js" data-src="index.js" inject="true"></script>
 ```
