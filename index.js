@@ -1,6 +1,6 @@
 // html-webpack-inject-attributes-plugin
 var assign = require('lodash.assign');
-var foreach = require('lodash.foreach');
+var forEach = require('lodash.foreach');
 
 function MyPlugin(options) {
     this.options = options;
