@@ -1,30 +1,30 @@
-// html-webpack-inject-attributes-plugin
-var assign = require('lodash.assign');
-var forEach = require('lodash.foreach');
+var assign = require("lodash.assign");
+var forEach = require("lodash.foreach");
 
-function MyPlugin(options) {
+function htmlWebpackInjectAttributesPlugin(options) {
     this.options = options;
 }
 
-MyPlugin.prototype.apply = function (compiler) {
+htmlWebpackInjectAttributesPlugin.prototype.apply = function(compiler) {
     var self = this;
-    compiler.plugin('compilation', function (compilation) {
+    compiler.hooks.compilation.tap("htmlWebpackInjectAttributesPlugin", function (compilation) {
         function addAttr(tags, key, val) {
             if (!tags || !tags.length) {
                 return;
             }
-            forEach(tags, function (tag, index) {
+            forEach(tags, function(tag, index) {
                 var value = val;
-                if (typeof val === 'function') {
+                if (typeof val === "function") {
                     value = val(tag, compilation, index);
                 }
                 tag.attributes[key] = value;
             });
         }
-        compilation.plugin('html-webpack-plugin-alter-asset-tags', function (htmlPluginData, callback) {
+
+        compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync("htmlWebpackInjectAttributesPlugin", function(htmlPluginData, callback) {
             var options = assign({}, self.options, htmlPluginData.plugin.options && htmlPluginData.plugin.options.attributes);
             forEach(options, function(val, key) {
-                if (typeof val !== 'string' && typeof val !== 'function') {
+                if (typeof val !== "string" && typeof val !== "function") {
                     return;
                 }
                 addAttr(htmlPluginData.head, key, val);
@@ -33,7 +33,6 @@ MyPlugin.prototype.apply = function (compiler) {
             callback(null, htmlPluginData);
         });
     });
-
 };
 
-module.exports = MyPlugin;
+module.exports = htmlWebpackInjectAttributesPlugin;
