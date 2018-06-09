@@ -1,6 +1,6 @@
 {
   "name": "html-webpack-inject-attributes-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "add custom attributes to inject script and link",
   "main": "index.js",
   "scripts": {
