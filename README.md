@@ -8,18 +8,22 @@ add custom attributes to inject tags
 
 ### use
 
+please use it after `html-webpack-plugin`, especially in webpack2+.
+
 add to all inject tags
 ```javascript
     plugins = [
         new htmlWebpackInjectAttributesPlugin({
-            inject: "true"
+            inject: "true",
+            async: true,
+            test: {}
         })  // Object, key should be string, value can be string or function
     ]
 ```
 you got
 
 ```html
-    <script type="text/javascript" src="index.js" inject="true"></script>
+    <script type="text/javascript" src="index.js" inject="true" async test="{}"></script>
 ```
 
 add to chunks in HtmlWebpackPlugin

@@ -10,6 +10,8 @@ function addAttr(compilation, tags, key, val) {
         var value = val;
         if (typeof val === "function") {
             value = val(tag, compilation, index);
+        } else if (typeof val === 'object') {
+            value = JSON.stringify(val);
         }
         tag.attributes[key] = value;
     });
@@ -17,9 +19,6 @@ function addAttr(compilation, tags, key, val) {
 function alterAssetTags(compilation, htmlPluginData, callback) {
     var options = assign({}, this.options, htmlPluginData.plugin.options && htmlPluginData.plugin.options.attributes);
     forEach(options, function (val, key) {
-        if (typeof val !== 'string' && typeof val !== 'function') {
-            return;
-        }
         addAttr(compilation, htmlPluginData.head, key, val);
         addAttr(compilation, htmlPluginData.body, key, val);
     });
@@ -37,9 +36,19 @@ function htmlWebpackInjectAttributesPlugin(options) {
 
 htmlWebpackInjectAttributesPlugin.prototype.apply = function (compiler) {
     var self = this;
-    compiler.plugin('compilation', function (compilation) {
-        compilation.plugin('html-webpack-plugin-alter-asset-tags', alterAssetTags.bind(self, compilation));
-    });
+
+    if (compiler.hooks) {
+        compiler.hooks.compilation.tap("htmlWebpackInjectAttributesPlugin", function (compilation) {
+            compilation
+                .hooks
+                .htmlWebpackPluginAlterAssetTags
+                .tap("htmlWebpackInjectAttributesPlugin", alterAssetTags.bind(self, compilation));
+        });
+    } else {
+        compiler.plugin('compilation', function (compilation) {
+            compilation.plugin('html-webpack-plugin-alter-asset-tags', alterAssetTags.bind(self, compilation));
+        });
+    }
 };
 
 module.exports = htmlWebpackInjectAttributesPlugin;
