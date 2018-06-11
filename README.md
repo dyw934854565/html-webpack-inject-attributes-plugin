@@ -53,3 +53,7 @@ you got
 ```html
     <script type="text/javascript" src="index.js" data-src="index.js" inject="true"></script>
 ```
+
+### License
+
+MIT
