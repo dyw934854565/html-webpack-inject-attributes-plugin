@@ -17,7 +17,7 @@
     "webpack"
   ],
   "author": "dyw934854565@sina.com",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dyw934854565/html-webpack-inject-attributes-plugin/issues"
   },
