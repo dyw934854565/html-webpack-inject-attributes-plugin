@@ -54,6 +54,28 @@ you got
     <script type="text/javascript" src="index.js" data-src="index.js" inject="true"></script>
 ```
 
+return false to prevent some tags add attributes
+
+```javascript
+    plugins = [
+        new HtmlWebpackPlugin({
+            inject: true,
+            hash: true,
+            chunks: ['index'],
+            attributes: {
+                'data-src': function (tag, compilation, index) {
+                    if (tag.tagName === 'script') {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+        })
+    ]
+```
+
+style tags do not be affected
+
 ### License
 
 MIT
