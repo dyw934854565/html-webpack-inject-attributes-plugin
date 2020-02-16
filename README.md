@@ -2,17 +2,17 @@ html-webpack-inject-attributes-plugin
 =======================
 
 [![NPM version][npm-image]][npm-url]
-![][travis-url]
 ![][david-url]
 ![][dt-url]
 ![][license-url]
+
 
 add custom attributes to inject tags
 
 ### install
 
 ```javascript
-   npm install html-webpack-inject-attributes-plugin
+npm install html-webpack-inject-attributes-plugin -D
 ```
 
 ### use
@@ -85,6 +85,13 @@ return false to prevent some tags add attributes
 
 style tags do not be affected
 
-### License
+### LICENSE
 
-MIT
+[MIT License](https://raw.githubusercontent.com/leftstick/unminified-webpack-plugin/master/LICENSE)
+
+
+[npm-url]: https://npmjs.org/package/html-webpack-inject-attributes-plugin
+[npm-image]: https://badge.fury.io/js/html-webpack-inject-attributes-plugin.png
+[david-url]: https://david-dm.org/leftstick/html-webpack-inject-attributes-plugin.png
+[dt-url]:https://img.shields.io/npm/dt/html-webpack-inject-attributes-plugin.svg
+[license-url]:https://img.shields.io/npm/l/html-webpack-inject-attributes-plugin.svg
