@@ -1,3 +1,12 @@
+html-webpack-inject-attributes-plugin
+=======================
+
+[![NPM version][npm-image]][npm-url]
+![][travis-url]
+![][david-url]
+![][dt-url]
+![][license-url]
+
 add custom attributes to inject tags
 
 ### install
