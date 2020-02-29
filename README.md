@@ -1,10 +1,11 @@
 html-webpack-inject-attributes-plugin
 =======================
 
-[![NPM version][npm-image]][npm-url]
-![][david-url]
-![][dt-url]
-![][license-url]
+[![NPM Version][npm-image]][npm-url]
+[![Dependency Status][david-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Download Status][dt-image]][npm-url]
+[![MIT License][license-image]][license-url]
 
 
 add custom attributes to inject tags
@@ -87,11 +88,14 @@ style tags do not be affected
 
 ### LICENSE
 
-[MIT License](https://raw.githubusercontent.com/leftstick/unminified-webpack-plugin/master/LICENSE)
+[MIT License][license-url]
 
 
 [npm-url]: https://npmjs.org/package/html-webpack-inject-attributes-plugin
 [npm-image]: https://badge.fury.io/js/html-webpack-inject-attributes-plugin.png
-[david-url]: https://david-dm.org/leftstick/html-webpack-inject-attributes-plugin.png
-[dt-url]:https://img.shields.io/npm/dt/html-webpack-inject-attributes-plugin.svg
-[license-url]:https://img.shields.io/npm/l/html-webpack-inject-attributes-plugin.svg
+[david-image]: https://david-dm.org/leftstick/html-webpack-inject-attributes-plugin.png
+[dt-image]: https://img.shields.io/npm/dt/html-webpack-inject-attributes-plugin.svg
+[travis-image]: https://travis-ci.com/dyw934854565/html-webpack-inject-attributes-plugin.svg?branch=master
+[travis-url]: https://travis-ci.com/dyw934854565/html-webpack-inject-attributes-plugin
+[license-image]: https://img.shields.io/npm/l/html-webpack-inject-attributes-plugin.svg
+[license-url]: https://raw.githubusercontent.com/dyw934854565/html-webpack-inject-attributes-plugin/master/LICENSE
