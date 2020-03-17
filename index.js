@@ -1,6 +1,6 @@
 // html-webpack-inject-attributes-plugin
 var alterAssetTags = require('./lib/alterAssetTags')
-
+var safeRequire = require('safe-require')
 function htmlWebpackInjectAttributesPlugin(options) {
     this.options = options;
 }
@@ -10,10 +10,11 @@ htmlWebpackInjectAttributesPlugin.prototype.apply = function (compiler) {
 
     if (compiler.hooks) {
         compiler.hooks.compilation.tap("htmlWebpackInjectAttributesPlugin", function (compilation) {
-            compilation
-                .hooks
-                .htmlWebpackPluginAlterAssetTags
-                .tap("htmlWebpackInjectAttributesPlugin", alterAssetTags.bind(self, compilation));
+            var alterAssetTagsHook = compilation.hooks.htmlWebpackPluginAlterAssetTags
+            if (!alterAssetTagsHook) {
+                alterAssetTagsHook = safeRequire('html-webpack-plugin').getHooks(compilation).alterAssetTags
+            }
+            alterAssetTagsHook.tap("htmlWebpackInjectAttributesPlugin", alterAssetTags.bind(self, compilation));
         });
     } else {
         compiler.plugin('compilation', function (compilation) {
