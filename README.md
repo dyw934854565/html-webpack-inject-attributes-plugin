@@ -10,24 +10,26 @@ html-webpack-inject-attributes-plugin
 
 add custom attributes to inject tags
 
-### install
+# install
 
 ```javascript
 npm install html-webpack-inject-attributes-plugin -D
 ```
 
-### use
+# use
 
-please use it after `html-webpack-plugin`, especially in webpack2+.
+ > please use it after `html-webpack-plugin`, especially in webpack2+.
 
-add to all inject tags
+## add to all inject tags, effective in all html
+
 ```javascript
     plugins = [
+        new HtmlWebpackPlugin(),
         new htmlWebpackInjectAttributesPlugin({
             inject: "true",
             async: true,
             test: {}
-        })  // Object, key should be string, value can be string or function
+        })  // Object, key should be string, value can be string or function、object, object will stringify
     ]
 ```
 you got
@@ -36,19 +38,16 @@ you got
     <script type="text/javascript" src="index.js" inject="true" async test="{}"></script>
 ```
 
-add to chunks in HtmlWebpackPlugin
-by add attributes to HtmlWebpackPlugin
+## add to chunks in HtmlWebpackPlugin by add attributes to HtmlWebpackPlugin，only effective in the current html
 
 ```javascript
     plugins = [
         new HtmlWebpackPlugin({
-            inject: true,
-            hash: true,
-            chunks: ['index'],
             attributes: {
                 'data-src': function (tag) { return tag.attributes.src }
             },
-        })  // Object, key and value should be string
+        }),
+        new htmlWebpackInjectAttributesPlugin()
     ]
     /**
      *  if value is a function, got three arguments。
@@ -64,7 +63,7 @@ you got
     <script type="text/javascript" src="index.js" data-src="index.js" inject="true"></script>
 ```
 
-return false to prevent some tags add attributes
+## return false to prevent some tags add attributes
 
 ```javascript
     plugins = [
@@ -80,11 +79,39 @@ return false to prevent some tags add attributes
                     return false;
                 }
             },
-        })
+        }),
+        new htmlWebpackInjectAttributesPlugin()
     ]
 ```
 
 style tags do not be affected
+
+## use chainWebpack
+
+```javascript
+// vue.config.js
+const htmlInject = require('html-webpack-inject-attributes-plugin')
+module.exports = {
+  chainWebpack: (config) => {
+    config.plugin('html')
+      .tap(args => {
+        args[0].attributes = {
+          async: true,
+          inject: 'true'
+        }
+        return args
+      })
+
+    config.plugin('html-inject')
+      .after('html')
+      .use(htmlInject, [{
+          common: 'true'
+      }])
+  },
+}
+
+```
+
 
 ### LICENSE
 
